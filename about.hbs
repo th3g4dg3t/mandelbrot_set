@@ -1,0 +1,32 @@
+# Third Party Licenses
+
+This document lists the licenses of the third-party crates used in `study-diary`.
+
+## Overview of licenses
+
+{{#each overview}}
+- [{{name}}](#{{id}}) ({{count}})
+{{/each}}
+
+---
+
+## All license text
+
+{{#each licenses}}
+### {{name}} <a id="{{id}}"></a>
+
+#### Used by:
+{{#each used_by}}
+- `{{crate.name}} {{crate.version}}` {{#if crate.repository}}([Repository]({{crate.repository}})){{/if}}
+{{/each}}
+
+<details>
+<summary>Click to view full license text</summary>
+
+```text
+{{text}}
+```
+</details>
+
+---
+{{/each}}

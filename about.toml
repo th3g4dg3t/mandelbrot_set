@@ -1,0 +1,25 @@
+# about.toml configuration for cargo-about
+
+# List of accepted SPDX license identifiers.
+# Any license NOT on this list is automatically denied, and cargo-about
+# will fail the build if it encounters one.
+accepted = [
+    # --- Primary Permissive Licenses ---
+    "MIT",
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSD-3-Clause-Clear",
+    "ISC",
+    "Unlicense",
+    "CC0-1.0",
+    "0BSD",
+    "Zlib",
+    "BSL-1.0",
+    "NCSA",
+
+    # --- Unicode Data & Fonts ---
+    "Unicode-DFS-2016",
+    "Unicode-3.0",
+    "OFL-1.1",
+]
