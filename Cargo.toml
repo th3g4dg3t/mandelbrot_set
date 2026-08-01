@@ -6,10 +6,16 @@ license = "BSD-3-Clause-Clear"
 
 [dependencies]
 anyhow = "1.0"
+bytemuck = { version = "1.25", features = ["derive"] }
 clap = { version = "4.6", features = ["derive"] }
 image = "0.25"
+indicatif = "0.18"
 num-complex = "0.4"
+pollster = "1.0"
 rayon = "1.12"
+tracing = "0.1"
+tracing-indicatif = "0.3"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 wgpu = "30.0"
 
 [profile.release]
@@ -17,7 +23,6 @@ codegen-units = 1
 lto = true
 opt-level = 3
 strip = true
-panic = "abort"
 
 [profile.dev.package."*"]
 opt-level = 3

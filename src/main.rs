@@ -1,14 +1,36 @@
 use anyhow::Result;
 use clap::Parser;
-use image::{ImageBuffer, Rgb};
+use image::{ImageBuffer, ImageFormat, Rgb};
 use num_complex::Complex64;
 use rayon::prelude::*;
+use tracing::warn;
 
 mod cli;
 
 fn main() -> Result<()> {
     let mut user_input = cli::Cli::parse();
-    user_input.output_path_mut().set_extension("png");
+    tracing_subscriber::fmt().init();
+
+    // Set the default image format as PNG if not specified
+    if let Some(ext) = user_input.output_path().extension() {
+        if let Some(image_format) = ImageFormat::from_extension(ext) {
+            if !image_format.can_write() {
+                warn!(
+                    "Writing to \"{}\" format is not supported. Using PNG instead.",
+                    ext.to_string_lossy()
+                );
+                user_input.output_path_mut().set_extension("png");
+            }
+        } else {
+            warn!(
+                "Unrecognised format \"{}\". Using PNG instead.",
+                ext.to_string_lossy()
+            );
+            user_input.output_path_mut().set_extension("png");
+        };
+    } else {
+        user_input.output_path_mut().set_extension("png");
+    }
 
     // Define the image size and the part of the complex plain to display
     let cli::Resolution(imgx, imgy) = user_input.resolution().unwrap_or(cli::Resolution(800, 800));
